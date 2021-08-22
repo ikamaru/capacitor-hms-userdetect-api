@@ -9,14 +9,15 @@ import com.getcapacitor.annotation.CapacitorPlugin;
 @CapacitorPlugin(name = "UserDetect")
 public class UserDetectPlugin extends Plugin {
 
-    private UserDetect implementation = new UserDetect();
+    private UserDetect implementation;
 
+    @Override
+    public void load() {
+        super.load();
+        implementation= new UserDetect(this.bridge.getActivity());
+    }
     @PluginMethod
-    public void echo(PluginCall call) {
-        String value = call.getString("value");
-
-        JSObject ret = new JSObject();
-        ret.put("value", implementation.echo(value));
-        call.resolve(ret);
+    public void detectUser(PluginCall call) {
+        implementation.detectUser(call);
     }
 }

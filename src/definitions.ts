@@ -1,3 +1,4 @@
+
 export interface UserDetectPlugin {
-  echo(options: { value: string }): Promise<{ value: string }>;
+  detectUser(options: { appId: string }):Promise<{ token: string }>;
 }
